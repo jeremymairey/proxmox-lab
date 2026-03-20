@@ -59,7 +59,7 @@ sudo ufw enable
 id admin               # Vérifie l’existence de l’utilisateur
 sudo -l                # Vérifie les droits sudo
 systemctl status ssh   # Vérifie que SSH fonctionne
-sudo ufw status             # Vérifie les règles du firewall
+sudo ufw status        # Vérifie les règles du firewall
 ```
 
 <img src="captures/verifications.png" width="600">
