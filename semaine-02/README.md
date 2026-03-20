@@ -27,6 +27,9 @@ sudo usermod -aG sudo admin
 ## 3. Configuration SSH
 
 ```bash
+# Installer le serveur SSH
+sudo apt install openssh-server -y
+
 # Modifier la configuration SSH
 sudo nano /etc/ssh/sshd_config
 
@@ -35,7 +38,7 @@ PermitRootLogin no
 PasswordAuthentification yes
 
 # Redémarrer SSH
-sudo systemctl restart ssh
+sudo systemctl restart sshd
 ```
 
 ## 4. Firewall UFW
@@ -56,8 +59,9 @@ sudo ufw enable
 id admin               # Vérifie l’existence de l’utilisateur
 sudo -l                # Vérifie les droits sudo
 systemctl status ssh   # Vérifie que SSH fonctionne
-ufw status             # Vérifie les règles du firewall
+sudo ufw status             # Vérifie les règles du firewall
 ```
 
-
+![Vérifications](captures/verifications.png)
+![Connexion SSH](captures/ssh_powershell.png)
 
