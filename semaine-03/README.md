@@ -7,11 +7,11 @@ Comprendre et diagnostiquer les services Linux via **systemd**, analyser les log
 
 ### Commandes essentielles
 ```bash
-systemctl status <service>
-systemctl start <service>
-systemctl stop <service>
-systemctl restart <service>
-systemctl enable --now <service>
+systemctl status <service>        # Affiche l'état du service + derniers logs
+systemctl start <service>         # Démarre le service
+systemctl stop <service>          # Arrête le service
+systemctl restart <service>       # Redémarre le service (après modification)
+systemctl enable --now <service>  # Active au démarrage + démarre immédiatement
 ```
 
 ### Points à vérifier
@@ -26,10 +26,11 @@ systemctl enable --now <service>
 
 ### Commandes utiles
 ```bash
-journalctl -u <service>
-journalctl -u <service> -b
-journalctl -u <service> -f
-journalctl -p err -u <service>
+journalctl -u <service>           # Affiche tous les logs du service
+journalctl -u <service> -b        # Logs du service depuis le dernier boot
+journalctl -u <service> -n 50     # Affiche les 50 derniers logs
+journalctl -u <service> -f        # Affiche les logs en temps réel
+journalctl -u <service> -p err    # Affiche uniquement les erreurs
 ```
 
 ### Ce qu’on cherche
@@ -50,9 +51,9 @@ journalctl -p err -u <service>
 
 ### Commandes utiles
 ```bash
-tail -n 50 /var/log/syslog
-grep -i error /var/log/syslog
-less /var/log/auth.log
+tail -n 50 /var/log/syslog        # Affiche les 50 dernières lignes du syslog
+grep -i error /var/log/syslog     # Cherche les erreurs dans le syslog
+less /var/log/auth.log            # Ouvre les logs d'authentification
 ```
 
 ---
@@ -64,32 +65,20 @@ less /var/log/auth.log
 3. Tester la configuration (\`nginx -t\`, \`sshd -t\`)  
 4. Vérifier permissions & ownership  
 5. Vérifier le réseau (\`ss -tulpn\`, \`curl\`)  
-6. Redémarrer et revérifier  
-
+6. Redémarrer et revérifier
 ---
 
 ## 5. Exemple concret : SSH qui ne démarre pas
 
 ### Étapes
 ```bash
-# 1. Vérifier l’état du service
-systemctl status ssh
-
-# 2. Lire les logs du service
-journalctl -u ssh -b -n 50
-
-# 3. Tester la configuration
-sudo sshd -t
-
-# 4. Vérifier permissions & ownership
-ls -l /etc/ssh/sshd_config
-sudo chown root:root /etc/ssh/sshd_config
-sudo chmod 600 /etc/ssh/sshd_config
-
-# 5. Modifier la configuration si nécessaire
-sudo nano /etc/ssh/sshd_config
-
-# 6. Redémarrer et vérifier le port
-sudo systemctl restart ssh
-ss -tulpn | grep ssh
+systemctl status ssh                          # Vérifie l'état du service
+journalctl -u ssh -b -n 50                    # Affiche les derniers logs SSH
+sudo sshd -t                                  # Teste la configuration SSH
+ls -l /etc/ssh/sshd_config                    # Vérifie permissions & ownership
+sudo chown root:root /etc/ssh/sshd_config     # Corrige propriétaire
+sudo chmod 600 /etc/ssh/sshd_config           # Corrige permissions
+sudo nano /etc/ssh/sshd_config                # Modifie la configuration si nécessaire
+sudo systemctl restart ssh                    # Redémarre le service
+ss -tulpn | grep ssh                          # Vérifie que SSH écoute sur le port 22
 ```
