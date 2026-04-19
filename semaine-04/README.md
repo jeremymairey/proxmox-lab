@@ -2,10 +2,10 @@
 
 ## 1. Objectif
 Installer Proxmox VE dans une machine virtuelle afin de comprendre :
-- comment Proxmox remplace un OS classique
-- comment fonctionne l'installation
-- comment accéder à l'interface web
-- comment vérifier que tout fonctionne
+- Comment Proxmox remplace un OS classique
+- Comment fonctionne l'installation
+- Comment accéder à l'interface web
+- Comment vérifier que tout fonctionne
 
 ---
 
@@ -81,6 +81,7 @@ ip a                          # Vérifie l'adresse IP
 systemctl status pvedaemon    # Vérifie le service principal Proxmox
 systemctl status pveproxy     # Vérifie l'interface web
 df -h                         # Vérifie le stockage
+```
 
 ## 7. Notes d'installation
 
