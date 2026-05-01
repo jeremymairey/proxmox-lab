@@ -69,7 +69,7 @@ Connexion :
 - realm : Linux PAM standard authentication (Debian)
 
 <img src="captures/login.png" width="600">
-<img src="captures/web_ui.png" width="600">
+<img src="captures/web-ui.png" width="600">
 
 ---
 

@@ -63,4 +63,4 @@ sudo ufw status        # Vérifie les règles du firewall
 ```
 
 <img src="captures/verifications.png" width="600">
-<img src="captures/ssh_powershell.png" width="600">
+<img src="captures/ssh-powershell.png" width="600">
